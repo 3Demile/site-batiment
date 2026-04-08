@@ -1,1 +1,749 @@
-# site-batiment
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entreprise Bâtiment | Rénovation intérieure et extérieure</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #0f4c81;
+      --primary-dark: #0a3356;
+      --accent: #d97706;
+      --border: #e5e7eb;
+      --success: #166534;
+      --shadow: 0 12px 28px rgba(15, 76, 129, 0.12);
+      --radius: 18px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: var(--primary-dark);
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .topbar .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 24px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .lang-btn {
+      border: 1px solid rgba(255,255,255,0.35);
+      background: transparent;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .lang-btn.active {
+      background: #fff;
+      color: var(--primary-dark);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(245, 247, 251, 0.88);
+      border-bottom: 1px solid rgba(229,231,235,0.85);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand strong {
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .cta-btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+      background:
+        linear-gradient(rgba(10, 51, 86, 0.74), rgba(10, 51, 86, 0.72)),
+        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80') center/cover;
+      color: #fff;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      margin: 0 0 18px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 0 24px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.42);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 18px 38px rgba(0,0,0,0.18);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .hero-list {
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-list li {
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.11);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    section {
+      padding: 68px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin: 0;
+      color: var(--primary-dark);
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: var(--primary);
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .about-grid,
+    .contact-grid,
+    .gallery-grid,
+    .steps-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+    }
+
+    .about-box,
+    .contact-box,
+    .step,
+    .gallery-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .about-box {
+      padding: 26px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #eef4fb;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gallery-item {
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      height: 240px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-caption {
+      padding: 16px;
+    }
+
+    .gallery-caption strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--primary-dark);
+    }
+
+    .gallery-caption span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .steps-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .step {
+      padding: 22px;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    .contact-grid {
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: start;
+    }
+
+    .contact-box {
+      padding: 24px;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-list li {
+      padding: 14px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      font: inherit;
+      color: var(--text);
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    button[type="submit"] {
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      padding: 14px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .notice {
+      font-size: 14px;
+      color: var(--success);
+      margin-top: 10px;
+      display: none;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-box {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1000px) {
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .cards,
+      .gallery-grid,
+      .steps-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      nav,
+      .topbar .container,
+      .section-head,
+      .footer-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .contact-grid,
+      .cards,
+      .gallery-grid,
+      .steps-grid,
+      .two-cols {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div>
+        <span data-fr="Entreprise familiale de rénovation" data-pl="Rodzinna firma remontowo-budowlana">Entreprise familiale de rénovation</span>
+        ·
+        <span data-fr="Intérieur et extérieur" data-pl="Prace wewnętrzne i zewnętrzne">Intérieur et extérieur</span>
+      </div>
+      <div class="lang-switch">
+        <span data-fr="Langue :" data-pl="Język:">Langue :</span>
+        <button class="lang-btn active" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="pl">PL</button>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <strong>Nom de l’entreprise</strong>
+          <span data-fr="Rénovation · Finitions · Chantiers sur mesure" data-pl="Remonty · Wykończenia · Realizacje na zamówienie">Rénovation · Finitions · Chantiers sur mesure</span>
+        </div>
+        <div class="nav-links">
+          <a href="#services" data-fr="Services" data-pl="Usługi">Services</a>
+          <a href="#galerie" data-fr="Galerie" data-pl="Galeria">Galerie</a>
+          <a href="#apropos" data-fr="À propos" data-pl="O firmie">À propos</a>
+          <a href="#contact" data-fr="Contact" data-pl="Kontakt">Contact</a>
+          <a href="#contact" class="cta-btn" data-fr="Demander un devis" data-pl="Poproś o wycenę">Demander un devis</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1 data-fr="Travaux de rénovation intérieure et extérieure avec finitions soignées" data-pl="Prace remontowe wewnętrzne i zewnętrzne z dbałością o wykończenie">Travaux de rénovation intérieure et extérieure avec finitions soignées</h1>
+        <p data-fr="Nous accompagnons les particuliers et les professionnels pour leurs projets de rénovation, d’aménagement et de remise en état. Travail sérieux, communication claire et résultats propres." data-pl="Pomagamy klientom prywatnym i firmom w remontach, wykończeniach i modernizacji. Solidna praca, jasna komunikacja i estetyczne wykonanie.">Nous accompagnons les particuliers et les professionnels pour leurs projets de rénovation, d’aménagement et de remise en état. Travail sérieux, communication claire et résultats propres.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="cta-btn" data-fr="Obtenir un devis gratuit" data-pl="Uzyskaj darmową wycenę">Obtenir un devis gratuit</a>
+          <a href="#galerie" class="btn-secondary" data-fr="Voir nos réalisations" data-pl="Zobacz nasze realizacje">Voir nos réalisations</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3 data-fr="Nos points forts" data-pl="Nasze mocne strony">Nos points forts</h3>
+        <ul class="hero-list">
+          <li data-fr="✅ Travaux intérieurs et extérieurs" data-pl="✅ Prace wewnętrzne i zewnętrzne">✅ Travaux intérieurs et extérieurs</li>
+          <li data-fr="✅ Devis clair et réponse rapide" data-pl="✅ Jasna wycena i szybka odpowiedź">✅ Devis clair et réponse rapide</li>
+          <li data-fr="✅ Équipe expérimentée" data-pl="✅ Doświadczony zespół">✅ Équipe expérimentée</li>
+          <li data-fr="✅ Communication français / polonais" data-pl="✅ Komunikacja po francusku / polsku">✅ Communication français / polonais</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-fr="Nos services" data-pl="Nasze usługi">Nos services</h2>
+          <p data-fr="Voici une base que tu peux adapter selon les vrais travaux de l’entreprise." data-pl="To jest baza, którą możesz dopasować do rzeczywistych usług firmy.">Voici une base que tu peux adapter selon les vrais travaux de l’entreprise.</p>
+        </div>
+      </div>
+
+      <div class="cards">
+        <article class="card">
+          <h3 data-fr="Rénovation intérieure" data-pl="Remonty wnętrz">Rénovation intérieure</h3>
+          <p data-fr="Remise à neuf des pièces de vie, cuisines, salles de bain et espaces professionnels." data-pl="Odnowienie salonów, kuchni, łazienek i pomieszczeń użytkowych.">Remise à neuf des pièces de vie, cuisines, salles de bain et espaces professionnels.</p>
+          <ul>
+            <li data-fr="Peinture et finitions" data-pl="Malowanie i wykończenia">Peinture et finitions</li>
+            <li data-fr="Cloisons et faux plafonds" data-pl="Ścianki działowe i sufity podwieszane">Cloisons et faux plafonds</li>
+            <li data-fr="Pose de revêtements" data-pl="Układanie okładzin">Pose de revêtements</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 data-fr="Travaux extérieurs" data-pl="Prace zewnętrzne">Travaux extérieurs</h3>
+          <p data-fr="Amélioration, réparation et finitions extérieures pour valoriser le bâtiment." data-pl="Modernizacja, naprawy i wykończenia zewnętrzne poprawiające wygląd budynku.">Amélioration, réparation et finitions extérieures pour valoriser le bâtiment.</p>
+          <ul>
+            <li data-fr="Façades et réparations" data-pl="Elewacje i naprawy">Façades et réparations</li>
+            <li data-fr="Terrasses et aménagements" data-pl="Tarasy i zagospodarowanie">Terrasses et aménagements</li>
+            <li data-fr="Petites maçonneries" data-pl="Drobne prace murarskie">Petites maçonneries</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 data-fr="Finitions et remise en état" data-pl="Wykończenia i odświeżenie">Finitions et remise en état</h3>
+          <p data-fr="Interventions propres et précises pour livrer un chantier net et fonctionnel." data-pl="Czyste i precyzyjne prace, aby oddać estetyczne i funkcjonalne wnętrze.">Interventions propres et précises pour livrer un chantier net et fonctionnel.</p>
+          <ul>
+            <li data-fr="Enduits et préparation support" data-pl="Gładzie i przygotowanie podłoża">Enduits et préparation support</li>
+            <li data-fr="Nettoyage de fin de chantier" data-pl="Sprzątanie po zakończeniu prac">Nettoyage de fin de chantier</li>
+            <li data-fr="Corrections et ajustements" data-pl="Poprawki i regulacje">Corrections et ajustements</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="galerie">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2 data-fr="Quelques réalisations" data-pl="Wybrane realizacje">Quelques réalisations</h2>
+          <p data-fr="Remplace ces images par de vraies photos avant / après des chantiers de ton père. C’est la partie la plus importante du site." data-pl="Zamień te zdjęcia na prawdziwe fotografie przed / po z realizacji twojego taty. To najważniejsza część strony.">Remplace ces images par de vraies photos avant / après des chantiers de ton père. C’est la partie la plus importante du site.</p>
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <article class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80" alt="Rénovation intérieure" />
+          <div class="gallery-caption">
+            <strong data-fr="Salle de bain rénovée" data-pl="Wyremontowana łazienka">Salle de bain rénovée</strong>
+            <span data-fr="Modernisation complète et finitions propres" data-pl="Kompletna modernizacja i estetyczne wykończenie">Modernisation complète et finitions propres</span>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80" alt="Cuisine rénovée" />
+          <div class="gallery-caption">
+            <strong data-fr="Cuisine et finitions" data-pl="Kuchnia i wykończenia">Cuisine et finitions</strong>
+            <span data-fr="Travaux soignés et détails maîtrisés" data-pl="Staranna realizacja i dopracowane detale">Travaux soignés et détails maîtrisés</span>
+          </div>
+        </article>
+
+        <article class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Travaux extérieurs" />
+          <div class="gallery-caption">
+            <strong data-fr="Aménagement extérieur" data-pl="Prace zewnętrzne">Aménagement extérieur</strong>
+            <span data-fr="Intervention propre et chantier bien organisé" data-pl="Czysta realizacja i dobrze zorganizowany plac prac">Intervention propre et chantier bien organisé</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="apropos">
+    <div class="container about-grid">
+      <div class="about-box">
+        <div class="section-head" style="margin-bottom: 18px;">
+          <div>
+            <h2 data-fr="À propos de l’entreprise" data-pl="O firmie">À propos de l’entreprise</h2>
+            <p data-fr="Tu peux remplacer ce texte par l’histoire réelle de l’entreprise : depuis quand elle existe, où elle intervient et ce qui la différencie." data-pl="Możesz zamienić ten tekst na prawdziwą historię firmy: od kiedy istnieje, gdzie działa i co ją wyróżnia.">Tu peux remplacer ce texte par l’histoire réelle de l’entreprise : depuis quand elle existe, où elle intervient et ce qui la différencie.</p>
+          </div>
+        </div>
+
+        <p data-fr="Entreprise familiale spécialisée dans les travaux de rénovation intérieure et extérieure. Nous mettons l’accent sur la qualité d’exécution, la propreté du chantier, le respect des délais et une relation simple avec le client." data-pl="Rodzinna firma specjalizująca się w pracach remontowych wewnętrznych i zewnętrznych. Stawiamy na jakość wykonania, porządek na budowie, dotrzymywanie terminów i prostą komunikację z klientem.">Entreprise familiale spécialisée dans les travaux de rénovation intérieure et extérieure. Nous mettons l’accent sur la qualité d’exécution, la propreté du chantier, le respect des délais et une relation simple avec le client.</p>
+
+        <div class="pill-row">
+          <span class="pill" data-fr="Travail soigné" data-pl="Dokładna praca">Travail soigné</span>
+          <span class="pill" data-fr="Réponse rapide" data-pl="Szybka odpowiedź">Réponse rapide</span>
+          <span class="pill" data-fr="Chantier propre" data-pl="Czysty plac prac">Chantier propre</span>
+          <span class="pill" data-fr="FR / PL" data-pl="FR / PL">FR / PL</span>
+        </div>
+      </div>
+
+      <div class="about-box">
+        <div class="section-head" style="margin-bottom: 18px;">
+          <div>
+            <h2 data-fr="Comment nous travaillons" data-pl="Jak pracujemy">Comment nous travaillons</h2>
+            <p data-fr="Un processus simple et rassurant pour le client." data-pl="Prosty i uspokajający proces dla klienta.">Un processus simple et rassurant pour le client.</p>
+          </div>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3 data-fr="Prise de contact" data-pl="Pierwszy kontakt">Prise de contact</h3>
+            <p data-fr="Le client explique son besoin." data-pl="Klient opisuje swoje potrzeby.">Le client explique son besoin.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3 data-fr="Visite / analyse" data-pl="Wizyta / analiza">Visite / analyse</h3>
+            <p data-fr="Évaluation du chantier et des contraintes." data-pl="Ocena prac i ograniczeń na miejscu.">Évaluation du chantier et des contraintes.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3 data-fr="Devis clair" data-pl="Jasna wycena">Devis clair</h3>
+            <p data-fr="Proposition simple et compréhensible." data-pl="Prosta i zrozumiała propozycja.">Proposition simple et compréhensible.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3 data-fr="Réalisation" data-pl="Realizacja">Réalisation</h3>
+            <p data-fr="Travaux effectués avec suivi et propreté." data-pl="Prace wykonane z dbałością i porządkiem.">Travaux effectués avec suivi et propreté.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container contact-grid">
+      <div class="contact-box">
+        <div class="section-head" style="margin-bottom: 18px;">
+          <div>
+            <h2 data-fr="Contact et devis" data-pl="Kontakt i wycena">Contact et devis</h2>
+            <p data-fr="Ajoute ici les vraies coordonnées de ton père." data-pl="Dodaj tutaj prawdziwe dane kontaktowe twojego taty.">Ajoute ici les vraies coordonnées de ton père.</p>
+          </div>
+        </div>
+
+        <ul class="contact-list">
+          <li><strong data-fr="Téléphone :" data-pl="Telefon:">Téléphone :</strong> +32 XX XX XX XX</li>
+          <li><strong>Email :</strong> contact@entreprise.be</li>
+          <li><strong data-fr="Zone d’intervention :" data-pl="Obszar działania:">Zone d’intervention :</strong> Belgique</li>
+          <li><strong data-fr="Langues :" data-pl="Języki:">Langues :</strong> Français / Polski</li>
+        </ul>
+      </div>
+
+      <div class="contact-box">
+        <form id="quoteForm">
+          <div class="two-cols">
+            <input type="text" name="nom" placeholder="Nom" required />
+            <input type="tel" name="telephone" placeholder="Téléphone" required />
+          </div>
+          <div class="two-cols">
+            <input type="email" name="email" placeholder="Email" required />
+            <select name="service" required>
+              <option value="" data-fr="Type de travaux" data-pl="Rodzaj prac">Type de travaux</option>
+              <option data-fr="Rénovation intérieure" data-pl="Remont wnętrz">Rénovation intérieure</option>
+              <option data-fr="Travaux extérieurs" data-pl="Prace zewnętrzne">Travaux extérieurs</option>
+              <option data-fr="Finitions" data-pl="Wykończenia">Finitions</option>
+              <option data-fr="Autre demande" data-pl="Inne zapytanie">Autre demande</option>
+            </select>
+          </div>
+          <textarea name="message" placeholder="Décrivez votre projet..."></textarea>
+          <button type="submit" data-fr="Envoyer la demande" data-pl="Wyślij zapytanie">Envoyer la demande</button>
+          <div class="notice" id="formNotice" data-fr="Démo : connecte ce formulaire à Formspree, EmailJS ou Google Forms pour recevoir les demandes." data-pl="Demo: podłącz ten formularz do Formspree, EmailJS lub Google Forms, aby otrzymywać zapytania.">Démo : connecte ce formulaire à Formspree, EmailJS ou Google Forms pour recevoir les demandes.</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-box">
+      <div>© <span id="year"></span> Nom de l’entreprise</div>
+      <div data-fr="Site vitrine pour rénovation intérieure et extérieure" data-pl="Strona firmowa dla remontów wewnętrznych i zewnętrznych">Site vitrine pour rénovation intérieure et extérieure</div>
+    </div>
+  </footer>
+
+  <script>
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatable = document.querySelectorAll('[data-fr]');
+    const selectOptions = document.querySelectorAll('option[data-fr]');
+
+    function setLanguage(lang) {
+      translatable.forEach(el => {
+        if (el.placeholder !== undefined && el.dataset[lang]) {
+          if (el.hasAttribute('placeholder')) {
+            el.placeholder = el.dataset[lang];
+          } else {
+            el.textContent = el.dataset[lang];
+          }
+        } else if (el.dataset[lang]) {
+          el.textContent = el.dataset[lang];
+        }
+      });
+
+      selectOptions.forEach(option => {
+        if (option.dataset[lang]) option.textContent = option.dataset[lang];
+      });
+
+      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      document.documentElement.lang = lang === 'fr' ? 'fr' : 'pl';
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('quoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('formNotice').style.display = 'block';
+      this.reset();
+    });
+  </script>
+</body>
+</html>
